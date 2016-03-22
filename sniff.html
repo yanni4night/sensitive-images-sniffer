@@ -3,12 +3,41 @@
     <head>
         <meta charset="utf-8"/>
         <title>嗅探</title>
+        <style>
+        img {
+            max-width: 260px;
+            -webkit-filter: blur(10px);
+        }
+        img:hover {
+            -webkit-filter: none;
+        }
+        </style>
         <script src="scripts/libs/vue-dev.js"></script>
         <script src="scripts/libs/vuex.min.js"></script>
     </head>
     <body>
         <div id="content">
-            <nav v-if="totalPages!=null">共 <b>{{totalPages}}</b> 页</nav>
+            <nav v-if="totalPages">
+                <span>共 <b>{{totalNums}}</b> 条，每页 <b>{{itemsPerPage}}</b> 条，共 <b>{{totalPages}}</b> 页</span>
+                <span>从 <input type="number" value="{{startPage}}" min="1" max="{{endPage}}" @change="setStartPage"> 到 <input type="number" value="{{endPage}}" min="{{startPage}}" max="{{totalPages}}" @change="setEndPage"></span>
+                <select @change="updateImgTag">
+                    <option value="1" selected="selected">敏感图片</option>
+                    <option value="0">色情图片</option>
+                </select>
+
+                <button @click="load">Load</button>
+                <button @click="clear">Clear</button>
+            </nav>
+            <nav v-if="!totalPages">Loading...</nav>
+            <table v-if="totalPages">
+                <thead><tr><th>序号</th>
+                    <th>Image</th>
+                </tr></thead>
+                <tbody>
+                    <tr v-for="image in images"><td>{{1 + $index}}</td>
+                    <td><img v-bind:src="image.src" alt="Loading"></td></tr>
+                </tbody>
+            </table>
         </div>
     </body>
         <script src="src/DOMParser.js"></script>
