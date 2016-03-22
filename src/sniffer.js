@@ -19,6 +19,9 @@ const store = new Vuex.Store({
     mutations: {
         UPDATE_TOTAL_PAGES: (state, totalPages) => {
             state.totalPages = totalPages;
+        },
+        ERROR_PAGES: (state) => {
+            state.totalPages = null;
         }
     }
 });
@@ -35,7 +38,7 @@ const vuex = {
             .then(doc => {
                 const spans = doc.querySelectorAll('#pager .important');
                 return Math.ceil(+spans[0].innerText.trim()/+spans[1].innerText.trim());
-            }).then(store.dispatch.bind(store, 'UPDATE_TOTAL_PAGES'));
+            }).then(store.dispatch.bind(store, 'UPDATE_TOTAL_PAGES'), store.dispatch.bind(store, 'ERROR_PAGES'));
         }
     }
 };

@@ -8,7 +8,7 @@
     </head>
     <body>
         <div id="content">
-            <nav>共 <b>{{totalPages}}</b> 页</nav> <button @click="fetchTotalPages">fetchTotalPages</button>
+            <nav v-if="totalPages!=null">共 <b>{{totalPages}}</b> 页</nav>
         </div>
     </body>
         <script src="src/DOMParser.js"></script>
