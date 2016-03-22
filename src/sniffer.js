@@ -10,6 +10,8 @@
  * @since 1.0.0
  */
 
+Vue.use(Vuex);
+
 const store = new Vuex.Store({
     state: {
         totalPages: 0
@@ -18,19 +20,26 @@ const store = new Vuex.Store({
         UPDATE_TOTAL_PAGES: (state, totalPages) => {
             state.totalPages = totalPages;
         }
-    },
-    actions: {
-        fetchTotalPages: (store, pages) => {
-            setTimeout(() => {
-                store.dispatch('UPDATE_TOTAL_PAGES', pages);
-            }, 2e3);
-        }
     }
 });
 
-new Vue({
+const vuex = {
+    getters: {
+        totalPages: () => store.state.totalPages
+    },
+    actions: {
+        fetchTotalPages: () => {
+            setTimeout(() => {
+                store.dispatch('UPDATE_TOTAL_PAGES', 10)
+            }, 3e3)
+        }
+    }
+};
+
+const app = new Vue({
     el: '#content',
-    data: store.state
+    store,
+    vuex
 });
 
-store.actions.fetchTotalPages(1678);
+vuex.actions.fetchTotalPages();
