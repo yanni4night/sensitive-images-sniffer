@@ -10,13 +10,13 @@
  * @since 1.0.0
  */
 
-const DOMParser = (domStr, onParsed) => {
+const parseDOM = (domStr) => {
     var doc;
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     iframe.src = 'about:blank';
     document.body.appendChild(iframe);
     doc = iframe.contentWindow.document;
-    doc.body.innerHTML = html;
-    onParsed(doc);
+    doc.body.innerHTML = domStr;
+    return doc;
 };
