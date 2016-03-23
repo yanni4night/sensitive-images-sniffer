@@ -1,6 +1,8 @@
 # sensitive images sniffer
 
-贴吧 `imis` 后台敏感图片地址归档。
+`IMIS` 后台敏感图片归档。
 
 
->supported by [vue.js](http://vuejs.org).
+>Supported by [vue.js](http://vuejs.org) and [bootstrap](http://getbootstrap.com/).
+
+![ScreenShot](screenshot.png)
