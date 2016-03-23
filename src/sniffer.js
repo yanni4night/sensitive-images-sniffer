@@ -16,6 +16,8 @@ const pageUrls = (imageTag, pageNo) => {
     return `http://m1-forum-mis01.m1.baidu.com:8090/new-spam-mis/imgctltool/imageCtl?action=list&imgTag=${imageTag}&page=${pageNo}`;
 };
 
+const calculateTotalPages = (totalNums, itemsPerPage) => Math.ceil(totalNums / itemsPerPage)
+
 const store = new Vuex.Store({
     state: {
         totalNums: 0,
@@ -55,7 +57,7 @@ const vuex = {
     getters: {
         totalNums: () => store.state.totalNums,
         itemsPerPage: () => store.state.itemsPerPage,
-        totalPages: () => Math.ceil(store.state.totalNums / store.state.itemsPerPage),
+        totalPages: () => calculateTotalPages(store.state.totalNums, store.state.itemsPerPage),
         startPage: () => store.state.startPage,
         endPage: () => store.state.endPage,
         imgTag: () => store.state.imgTag,
@@ -75,13 +77,14 @@ const vuex = {
                 }).then(store.dispatch.bind(store, 'UPDATE_TOTAL_PAGES'), store.dispatch.bind(store, 'ERROR_PAGES'));
         },
         load: () => {
-            var startPage = store.state.startPage;
-            var endPage = store.state.endPage;
-            var totalPages = store.state.totalPages;
+            var startPage = +store.state.startPage;
+            var endPage = +store.state.endPage;
+            var totalPages = calculateTotalPages(store.state.totalNums, store.state.itemsPerPage)
 
             if (startPage < 1) {
                 startPage = 1;
             }
+            
             if (endPage > totalPages) {
                 endPage = totalPages;
             }
@@ -94,7 +97,7 @@ const vuex = {
                         return Array.prototype.map.call(images, img => ({
                             src: img.src
                         }));
-                    }).then(store.dispatch.bind(store, 'LOAD_NEW_IMAGES'));
+                    }).then(store.dispatch.bind(store, 'LOAD_NEW_IMAGES')).catch((e) => console.error.bind(console));
 
             }
         },

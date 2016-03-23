@@ -19,7 +19,7 @@
         <div id="content">
             <nav v-if="totalPages">
                 <span>共 <b>{{totalNums}}</b> 条，每页 <b>{{itemsPerPage}}</b> 条，共 <b>{{totalPages}}</b> 页</span>
-                <span>从 <input type="number" value="{{startPage}}" min="1" max="{{endPage}}" @change="setStartPage"> 到 <input type="number" value="{{endPage}}" min="{{startPage}}" max="{{totalPages}}" @change="setEndPage"></span>
+                <span>从 <input type="number" :value="startPage" :min="1" :max="endPage" @change="setStartPage"> 到 <input type="number" :value="endPage" :min="startPage" :max="totalPages" @change="setEndPage"></span>
                 <select @change="updateImgTag">
                     <option value="1" selected="selected">敏感图片</option>
                     <option value="0">色情图片</option>
