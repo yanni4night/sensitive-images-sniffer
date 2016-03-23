@@ -33,8 +33,8 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <div class="navbar-form navbar-left">
                             <div class="form-group">
-                                <span>共 <b>{{totalNums}}</b> 条，每页 <b>{{itemsPerPage}}</b> 条，共 <b>{{totalPages}}</b> 页</span>
-                                <span>从 <input class="form-control" type="number" :value="startPage" :min="1" :max="endPage" @change="setStartPage"> 到 <input class="form-control" type="number" :value="endPage" :min="startPage" :max="totalPages" @change="setEndPage"></span>
+                                <span>共 <b>{{totalNums}}</b> 条，每页 <b>{{itemsPerPage}}</b> 条，共 <b>{{totalPages}}</b> 页</span>，
+                                <span>从 <input class="form-control" type="number" :value="startPage" :min="1" :max="endPage" @change="setStartPage"> 页到 <input class="form-control" type="number" :value="endPage" :min="startPage" :max="totalPages" @change="setEndPage"> 页，约 <b>{{itemsCount}}</b> 条</span>
                                 <select class="form-control" @change="updateImgTag">
                                     <option value="1" selected="selected">敏感图片</option>
                                     <option value="0">色情图片</option>

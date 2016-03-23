@@ -61,7 +61,8 @@ const vuex = {
         startPage: () => store.state.startPage,
         endPage: () => store.state.endPage,
         imgTag: () => store.state.imgTag,
-        images: () => store.state.images
+        images: () => store.state.images,
+        itemsCount: () => store.state.itemsPerPage * (store.state.endPage - store.state.startPage + 1)
     },
     actions: {
         fetchTotalPages: () => {
